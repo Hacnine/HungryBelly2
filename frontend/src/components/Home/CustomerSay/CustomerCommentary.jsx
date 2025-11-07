@@ -3,7 +3,7 @@ import React from 'react'
 const CustomerCommentary = () => {
     return (
     <>
-        <div>
+        <div data-aos="fadeInUp">
             <div className="text-lg font-semibold flex items-start">
                 <img src="/icon/quote.svg" alt="quote" className="w-6 h-6" />
                 <p className="pl-4 text-base">
@@ -12,7 +12,7 @@ const CustomerCommentary = () => {
             </div>
         </div>
 
-        <div className="flex items-center justify-between md:pl-10 sm:pt-14 mt-1  pt-5 pb-3">
+        <div data-aos="slideInUp" className="flex items-center justify-between md:pl-10 sm:pt-14 mt-1  pt-5 pb-3">
             <div className=' w-[90%] border-b-2 border-black'>
                 <p className=" font-bebus font-bold text-lg tracking-wider ">Khalid Al Dawsry</p>
                 <p className="text-sm font-medium">Jeddah, Saudi</p>

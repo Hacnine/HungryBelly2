@@ -2,7 +2,7 @@ import React from 'react';
 import circle from '../../../assets/images/logos/circle.svg'
 const MarketExperienceCard = () => {
   return (
-    <div className=" absolute md:left-8 top-6 left-10 flex items-center justify-center bg-white rounded-lg shadow-md p-3 w-44 h-24">
+    <div data-aos="bounceIn" className=" absolute md:left-8 top-6 left-10 flex items-center justify-center bg-white rounded-lg shadow-md p-3 w-44 h-24">
   
       <div className="relative flex items-center justify-center w-44 ">
      

@@ -3,6 +3,7 @@ import Sidebar from './Sidebar';
 import { Link, useLocation } from 'react-router-dom';
 import TotalOrder from '../../Common/TotalOrder';
 import { useOrder } from '../../../context/OrderContext';
+import { useAuth } from '../../../context/AuthContext';
 
 const Navbar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -11,6 +12,7 @@ const Navbar = () => {
 
 
     const { orders } = useOrder();
+    const { user } = useAuth();
     const location = useLocation(); // React Router hook to access the current location
 
 
@@ -69,9 +71,21 @@ const Navbar = () => {
                                 <Link to={'/client'} className={`border-b-2 ${location.pathname === '/client' ? " border-yellow-400" : "text-white border-transparent"} hover:text-yellow-400 `}>Clients</Link>
                                 <Link to={'/blog'} className={`border-b-2 ${location.pathname === '/blog' ? " border-yellow-400" : "text-white border-transparent"} hover:text-yellow-400 `}>Blog</Link>
                                 <Link to={'/contact'} className={`border-b-2 ${location.pathname === '/contact' ? " border-yellow-400" : "text-white border-transparent"} hover:text-yellow-400 `}>Contact</Link>
+                                <Link to={'/profile'} className={`border-b-2 ${location.pathname === '/profile' ? " border-yellow-400" : "text-white border-transparent"} hover:text-yellow-400 `}>Profile</Link>
+                                {user?.role === 'admin' && (
+                                    <Link to={'/admin'} className={`border-b-2 ${location.pathname === '/admin' ? " border-yellow-400" : "text-white border-transparent"} hover:text-yellow-400 `}>Admin</Link>
+                                )}
                             </nav>
                         </div>
                         <div className="lg:flex hidden items-center justify-end gap-2 border-">
+                            {user && (
+                                <div className="flex items-center gap-2 text-white mr-4">
+                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                                    </svg>
+                                    <span className="font-medium">{user.name}</span>
+                                </div>
+                            )}
                             <TotalOrder />
                             <button className="bg-yellow-400 text-black px-4 py-2 xl:text-base text-sm font-poppins font-semibold hidden lg:block">
                                 Book a Table
@@ -87,7 +101,7 @@ const Navbar = () => {
                     </div>
                 </div>
 
-                <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
+                <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} user={user} />
             </div>
         </div>
     );

@@ -41,7 +41,7 @@ export const fetchCurrentUser = createAsyncThunk("auth/fetchCurrentUser", async 
 
 const initialState = {
   user: null,
-  isAuthenticated: false,
+  isAuthenticated: localStorage.getItem("isAuthenticated") === "true",
   loading: false,
   error: null,
 }
@@ -65,6 +65,7 @@ const authSlice = createSlice({
         state.loading = false
         state.user = action.payload
         state.isAuthenticated = true
+        localStorage.setItem("isAuthenticated", "true")
       })
       .addCase(register.rejected, (state, action) => {
         state.loading = false
@@ -79,6 +80,7 @@ const authSlice = createSlice({
         state.loading = false
         state.user = action.payload
         state.isAuthenticated = true
+        localStorage.setItem("isAuthenticated", "true")
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false
@@ -89,15 +91,18 @@ const authSlice = createSlice({
         state.user = null
         state.isAuthenticated = false
         state.error = null
+        localStorage.setItem("isAuthenticated", "false")
       })
       // Fetch current user
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
         state.user = action.payload
         state.isAuthenticated = true
+        localStorage.setItem("isAuthenticated", "true")
       })
       .addCase(fetchCurrentUser.rejected, (state) => {
         state.user = null
         state.isAuthenticated = false
+        localStorage.setItem("isAuthenticated", "false")
       })
   },
 })

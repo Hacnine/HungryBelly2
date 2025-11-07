@@ -33,7 +33,8 @@ export default {
       },
       colors: {
         "customred": "#f24122",
-        "ligherpink": "#faf7f2"
+        "ligherpink": "#faf7f2",
+        "admin-orange": "#fc9a30"
       },
       screens: {
         "sc-390": "390px",

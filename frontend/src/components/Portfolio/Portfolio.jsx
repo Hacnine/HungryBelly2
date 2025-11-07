@@ -17,12 +17,12 @@ const Portfolio = () => {
   }, [location.pathname]);
 
   return (
-    <div className="pb-8 ">
-      <Hero />
-      <FeaturedDishes />
-      <ChefSpecialities />
-      <EventCatering />
-      <Testimonials />
+    <div className="pb-8 animate__animated animate__fadeIn">
+      <div className="animate__animated animate__slideInDown"><Hero /></div>
+      <div className="animate__animated animate__fadeInUp"><FeaturedDishes /></div>
+      <div className="animate__animated animate__slideInLeft"><ChefSpecialities /></div>
+      <div className="animate__animated animate__slideInRight"><EventCatering /></div>
+      <div className="animate__animated animate__zoomIn"><Testimonials /></div>
     </div>
   );
 };

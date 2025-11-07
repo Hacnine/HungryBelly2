@@ -39,8 +39,8 @@ export function AdminCouponsPage() {
   }
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
+    <div className="p-6 animate__animated animate__fadeIn">
+      <div className="flex justify-between items-center mb-6 animate__animated animate__slideInDown">
         <h1 className="text-3xl font-bold">Manage Coupons</h1>
         <button
           onClick={() => setShowForm(!showForm)}
@@ -51,7 +51,7 @@ export function AdminCouponsPage() {
       </div>
 
       {showForm && (
-        <form onSubmit={handleSubmit} className="mb-6 p-4 border rounded-lg">
+        <form onSubmit={handleSubmit} className="mb-6 p-4 border rounded-lg animate__animated animate__slideInDown">
           <div className="grid grid-cols-2 gap-4">
             <input
               type="text"
@@ -114,12 +114,12 @@ export function AdminCouponsPage() {
         </form>
       )}
 
-      <div className="grid gap-4">
+      <div className="grid gap-4 animate__animated animate__fadeInUp">
         {loading ? (
           <p>Loading coupons...</p>
         ) : (
           list.map((coupon) => (
-            <div key={coupon.id} className="p-4 border rounded-lg">
+            <div key={coupon.id} className="p-4 border rounded-lg animate__animated animate__zoomIn">
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="font-semibold text-lg">{coupon.code}</h3>

@@ -15,12 +15,12 @@ const About = () => {
 
 
   return (
-    <div className=" pb-8">
-      <Hero />
-      <Story />
-      <Values />
-      <Testimonials />
-      <Gallery/>
+    <div className=" pb-8 animate__animated animate__fadeIn">
+      <div className="animate__animated animate__slideInDown"><Hero /></div>
+      <div className="animate__animated animate__fadeInUp"><Story /></div>
+      <div className="animate__animated animate__slideInLeft"><Values /></div>
+      <div className="animate__animated animate__slideInRight"><Testimonials /></div>
+      <div className="animate__animated animate__zoomIn"><Gallery/></div>
     </div>
   );
 };

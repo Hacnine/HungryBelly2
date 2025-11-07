@@ -14,12 +14,12 @@ const Contact = () => {
   }, [location.pathname]);
 
   return (
-    <div className="pb-8">
-      <Hero />
-      <ContactDetails />
-      <ContactForm />
-      <Map />
-      <ContactUs />
+    <div className="pb-8 animate__animated animate__fadeIn">
+      <div className="animate__animated animate__slideInDown"><Hero /></div>
+      <div className="animate__animated animate__fadeInUp"><ContactDetails /></div>
+      <div className="animate__animated animate__slideInLeft"><ContactForm /></div>
+      <div className="animate__animated animate__slideInRight"><Map /></div>
+      <div className="animate__animated animate__zoomIn"><ContactUs /></div>
     </div>
   );
 };

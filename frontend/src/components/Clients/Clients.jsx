@@ -15,12 +15,12 @@ const Clients = () => {
   }, [location.pathname]);
 
   return (
-    <div className="pb-8 ">
-      <Hero />
-      <ClientLogos />
-      <Testimonials />
-      <ClientExperience />
-      <Contact />
+    <div className="pb-8 animate__animated animate__fadeIn">
+      <div className="animate__animated animate__slideInDown"><Hero /></div>
+      <div className="animate__animated animate__fadeInUp"><ClientLogos /></div>
+      <div className="animate__animated animate__slideInLeft"><Testimonials /></div>
+      <div className="animate__animated animate__slideInRight"><ClientExperience /></div>
+      <div className="animate__animated animate__zoomIn"><Contact /></div>
     </div>
   );
 };

@@ -22,8 +22,8 @@ export default function CheckoutPage() {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center animate__animated animate__fadeIn">
+        <div className="text-center animate__animated animate__zoomIn">
           <h1 className="text-2xl font-bold mb-4">Cart is empty</h1>
           <button onClick={() => navigate("/")} className="bg-blue-600 text-white px-6 py-2 rounded-lg">
             Continue Shopping
@@ -65,13 +65,13 @@ export default function CheckoutPage() {
   const finalTotal = Math.max(0, total + deliveryFee + tax - discountAmount)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 animate__animated animate__fadeIn">
       <div className="max-w-4xl mx-auto px-4">
-        <h1 className="text-3xl font-bold mb-8">Checkout</h1>
+        <h1 className="text-3xl font-bold mb-8 animate__animated animate__bounceIn">Checkout</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Order Summary */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 animate__animated animate__slideInLeft">
             {!showPayment ? (
               <>
                 <div className="bg-white rounded-lg shadow-md p-6 mb-6">
@@ -156,7 +156,7 @@ export default function CheckoutPage() {
           </div>
 
           {/* Order Total */}
-          <div className="bg-white rounded-lg shadow-md p-6 h-fit sticky top-8">
+          <div className="bg-white rounded-lg shadow-md p-6 h-fit sticky top-8 animate__animated animate__slideInRight">
             <h3 className="text-lg font-bold mb-4">Order Total</h3>
             <div className="space-y-2 text-gray-700 mb-4">
               <div className="flex justify-between">

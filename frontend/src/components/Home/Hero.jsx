@@ -8,7 +8,7 @@ const Hero = () => {
     return (
         <div className="flex flex-col items-center justify-center  md:bg-hero-bg bg-hero-sm bg-cover overflow-hidden -mt-20 text-white px-4 h-[750px]">
             {/* Header */}
-            <div className="mb-6">
+            <div data-aos="fadeIn" className="mb-6">
                 <h1
                     data-testid="HomePageHeroHeader"
                     className="text-3xl md:text-4xl font-semibold font-poppins text-center capitalize"
@@ -18,7 +18,7 @@ const Hero = () => {
             </div>
 
             {/* Address Input */}
-            <div className="flex flex-col items-center w-full max-w-md space-y-4">
+            <div data-aos="slideInUp" className="flex flex-col items-center w-full max-w-md space-y-4">
                 <form
                     autoComplete="off"
                     className="w-full flex items-center bg-white rounded-full "
@@ -66,6 +66,7 @@ const Hero = () => {
                 {/* Sign-in for saved address */}
                 <button
                     type="button"
+                    data-aos="fadeInUp"
                     className="bg-white text-gray-600 font-semibold py-3 text-xs px-6 rounded-full hover:bg-yellow-500"
                 >
                     Sign in for saved address

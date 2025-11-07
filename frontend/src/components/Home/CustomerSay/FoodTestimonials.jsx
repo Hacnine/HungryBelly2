@@ -11,7 +11,7 @@ const FoodTestimonials = ({ key }) => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row items-stretch bg-white w-full px-1" key={key}>
+    <div data-aos="fadeIn" className="flex flex-col lg:flex-row items-stretch bg-white w-full px-1" key={key}>
       {/* Commentary Section */}
       <div className="lg:w-[45%]  bg-commenttext text-black p-16 hidden lg:flex flex-col justify-between">
         <CustomerCommentary />

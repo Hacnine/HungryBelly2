@@ -5,11 +5,14 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { fetchAdminStats, fetchAllDrivers, createDriver } from "../store/adminSlice"
 import AdminOrdersPage from "./AdminOrdersPage"
+import AdminAddProductForm from "../components/AdminAddProductForm"
+import { useAuth } from "../context/AuthContext"
 
 export default function AdminDashboardPage() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { user } = useSelector((state) => state.auth)
+  // Use the AuthContext (RTK Query) for current user — the app fetches the user via AuthProvider
+  const { user } = useAuth()
   const { stats, drivers } = useSelector((state) => state.admin)
   const [activeTab, setActiveTab] = useState("orders")
   const [showDriverForm, setShowDriverForm] = useState(false)
@@ -32,10 +35,10 @@ export default function AdminDashboardPage() {
 
   if (user?.role !== "admin") {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
+      <div className="min-h-screen flex items-center justify-center animate__animated animate__fadeIn">
+        <div className="text-center animate__animated animate__zoomIn">
           <p className="text-gray-500 mb-4">Access denied. Admin only.</p>
-          <button onClick={() => navigate("/")} className="bg-blue-600 text-white px-6 py-2 rounded-lg">
+          <button onClick={() => navigate("/")} className="bg-admin-orange text-white px-6 py-2 rounded-lg">
             Back to Home
           </button>
         </div>
@@ -53,15 +56,15 @@ export default function AdminDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <nav className="bg-white shadow">
+    <div className="min-h-screen bg-gray-100 animate__animated animate__fadeIn">
+      <nav className="bg-white shadow animate__animated animate__slideInDown">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-blue-600">Admin Dashboard</h1>
-          <div className="flex items-center gap-4">
+          <h1 className="text-2xl font-bold text-admin-orange animate__animated animate__bounceIn">Admin Dashboard</h1>
+          <div className="flex items-center gap-4 animate__animated animate__fadeInRight">
             <span className="text-gray-700">{user?.name}</span>
             <button
               onClick={() => navigate("/")}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              className="px-4 py-2 bg-admin-orange text-white rounded-lg hover:bg-orange-600"
             >
               Back to App
             </button>
@@ -72,20 +75,20 @@ export default function AdminDashboardPage() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Stats Cards */}
         {stats && (
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div className="bg-white rounded-lg shadow p-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 animate__animated animate__fadeInUp">
+            <div className="bg-white rounded-lg shadow p-6 animate__animated animate__zoomIn">
               <p className="text-gray-600 text-sm">Total Orders</p>
-              <p className="text-3xl font-bold text-blue-600">{stats.totalOrders}</p>
+              <p className="text-3xl font-bold text-admin-orange">{stats.totalOrders}</p>
             </div>
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="bg-white rounded-lg shadow p-6 animate__animated animate__zoomIn">
               <p className="text-gray-600 text-sm">Total Revenue</p>
               <p className="text-3xl font-bold text-green-600">${stats.totalRevenue.toFixed(2)}</p>
             </div>
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="bg-white rounded-lg shadow p-6 animate__animated animate__zoomIn">
               <p className="text-gray-600 text-sm">Total Users</p>
               <p className="text-3xl font-bold text-purple-600">{stats.totalUsers}</p>
             </div>
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="bg-white rounded-lg shadow p-6 animate__animated animate__zoomIn">
               <p className="text-gray-600 text-sm">Active Drivers</p>
               <p className="text-3xl font-bold text-orange-600">{drivers?.length || 0}</p>
             </div>
@@ -93,13 +96,13 @@ export default function AdminDashboardPage() {
         )}
 
         {/* Tabs */}
-        <div className="bg-white rounded-lg shadow mb-6">
+        <div className="bg-white rounded-lg shadow mb-6 animate__animated animate__slideInUp">
           <div className="flex border-b">
             <button
               onClick={() => setActiveTab("orders")}
               className={`px-6 py-3 font-medium transition ${
                 activeTab === "orders"
-                  ? "text-blue-600 border-b-2 border-blue-600"
+                  ? "text-admin-orange border-b-2 border-admin-orange"
                   : "text-gray-600 hover:text-gray-900"
               }`}
             >
@@ -109,31 +112,41 @@ export default function AdminDashboardPage() {
               onClick={() => setActiveTab("drivers")}
               className={`px-6 py-3 font-medium transition ${
                 activeTab === "drivers"
-                  ? "text-blue-600 border-b-2 border-blue-600"
+                  ? "text-admin-orange border-b-2 border-admin-orange"
                   : "text-gray-600 hover:text-gray-900"
               }`}
             >
               Drivers
             </button>
+            <button
+              onClick={() => setActiveTab("products")}
+              className={`px-6 py-3 font-medium transition ${
+                activeTab === "products"
+                  ? "text-admin-orange border-b-2 border-admin-orange"
+                  : "text-gray-600 hover:text-gray-900"
+              }`}
+            >
+              Products
+            </button>
           </div>
 
-          <div className="p-6">
+          <div className="p-6 animate__animated animate__fadeIn">
             {activeTab === "orders" ? (
               <AdminOrdersPage />
-            ) : (
-              <div>
+            ) : activeTab === "drivers" ? (
+              <div className="animate__animated animate__slideInLeft">
                 <div className="flex justify-between items-center mb-6">
                   <h2 className="text-2xl font-bold">Drivers</h2>
                   <button
                     onClick={() => setShowDriverForm(!showDriverForm)}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                    className="px-4 py-2 bg-admin-orange text-white rounded-lg hover:bg-orange-600"
                   >
                     {showDriverForm ? "Cancel" : "Add Driver"}
                   </button>
                 </div>
 
                 {showDriverForm && (
-                  <form onSubmit={handleCreateDriver} className="bg-gray-50 p-6 rounded-lg mb-6 space-y-4">
+                  <form onSubmit={handleCreateDriver} className="bg-gray-50 p-6 rounded-lg mb-6 space-y-4 animate__animated animate__fadeInDown">
                     <input
                       type="text"
                       placeholder="Name"
@@ -179,7 +192,7 @@ export default function AdminDashboardPage() {
                 )}
 
                 {/* Drivers Table */}
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto animate__animated animate__fadeInUp">
                   <table className="w-full">
                     <thead className="bg-gray-100 border-b">
                       <tr>
@@ -220,6 +233,8 @@ export default function AdminDashboardPage() {
                   </table>
                 </div>
               </div>
+            ) : (
+              <AdminAddProductForm />
             )}
           </div>
         </div>

@@ -16,12 +16,12 @@ export default function Home() {
 
 
   return (
-    <div className=''>
+    <div>
       <Hero />
-      <FeaturedTab />
-      <FoodItemSlider />
-      <BookingForm />
-      <CommentarySlider />
+      <div data-aos="fadeInUp"><FeaturedTab /></div>
+      <div data-aos="slideInLeft"><FoodItemSlider /></div>
+      <div data-aos="slideInRight"><BookingForm /></div>
+      <div data-aos="fadeInUp"><CommentarySlider /></div>
     </div>
   )
 }

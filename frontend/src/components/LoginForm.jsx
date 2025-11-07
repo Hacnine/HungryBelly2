@@ -1,31 +1,39 @@
 "use client"
 
 import { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, Link } from "react-router-dom"
-import { login, clearError } from "../store/authSlice"
+import { useLoginMutation } from "../store/authApi"
 
 export default function LoginForm() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { loading, error } = useSelector((state) => state.auth)
+  const [login, { isLoading, error }] = useLoginMutation()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const result = await dispatch(login({ email, password }))
-    if (result.meta.requestStatus === "fulfilled") {
+    try {
+      const result = await login({ email, password }).unwrap()
+      localStorage.setItem("accessToken", result.accessToken)
+      localStorage.setItem("isAuthenticated", "true")
+      // Notify AuthProvider (and other windows) that auth state changed
+      try {
+        window.dispatchEvent(new Event("authChanged"))
+      } catch (e) {
+        /* ignore */
+      }
       navigate("/")
+    } catch (err) {
+      // Error is handled by RTK Query
     }
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
-        <h1 className="text-3xl font-bold text-center text-gray-900 mb-8">Food Delivery</h1>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4 animate__animated animate__fadeIn">
+      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8 animate__animated animate__zoomIn">
+        <h1 className="text-3xl font-bold text-center text-gray-900 mb-8 animate__animated animate__bounceIn">Food Delivery</h1>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 animate__animated animate__fadeInUp">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
             <input
@@ -52,8 +60,8 @@ export default function LoginForm() {
 
           {error && (
             <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm flex justify-between items-center">
-              <span>{error}</span>
-              <button type="button" onClick={() => dispatch(clearError())} className="text-red-500 hover:text-red-700">
+              <span>{error.data?.error || "Login failed"}</span>
+              <button type="button" onClick={() => {}} className="text-red-500 hover:text-red-700">
                 ×
               </button>
             </div>
@@ -61,10 +69,10 @@ export default function LoginForm() {
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={isLoading}
             className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-medium py-2 rounded-lg transition"
           >
-            {loading ? "Signing in..." : "Sign In"}
+            {isLoading ? "Signing in..." : "Sign In"}
           </button>
         </form>
 

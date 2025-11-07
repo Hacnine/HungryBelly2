@@ -19,7 +19,7 @@ export default function OrderConfirmationPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center animate__animated animate__fadeIn">
         <div className="text-gray-500">Loading order...</div>
       </div>
     )
@@ -27,8 +27,8 @@ export default function OrderConfirmationPage() {
 
   if (!selectedOrder) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
+      <div className="min-h-screen flex items-center justify-center animate__animated animate__fadeIn">
+        <div className="text-center animate__animated animate__zoomIn">
           <p className="text-gray-500 mb-4">Order not found</p>
           <button onClick={() => navigate("/")} className="bg-blue-600 text-white px-6 py-2 rounded-lg">
             Back to Home
@@ -39,14 +39,14 @@ export default function OrderConfirmationPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-100 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-100 py-8 animate__animated animate__fadeIn">
       <div className="max-w-2xl mx-auto px-4">
-        <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-          <div className="text-5xl mb-4">✓</div>
-          <h1 className="text-3xl font-bold text-green-600 mb-2">Order Confirmed!</h1>
-          <p className="text-gray-600 mb-6">Your order has been placed successfully</p>
+        <div className="bg-white rounded-lg shadow-lg p-8 text-center animate__animated animate__zoomIn">
+          <div className="text-5xl mb-4 animate__animated animate__bounceIn">✓</div>
+          <h1 className="text-3xl font-bold text-green-600 mb-2 animate__animated animate__fadeInUp">Order Confirmed!</h1>
+          <p className="text-gray-600 mb-6 animate__animated animate__fadeIn">Your order has been placed successfully</p>
 
-          <div className="bg-gray-50 rounded-lg p-6 mb-6 text-left">
+          <div className="bg-gray-50 rounded-lg p-6 mb-6 text-left animate__animated animate__slideInUp">
             <div className="grid grid-cols-2 gap-4 mb-6">
               <div>
                 <p className="text-sm text-gray-600">Order ID</p>
@@ -80,7 +80,7 @@ export default function OrderConfirmationPage() {
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-3 animate__animated animate__fadeInUp">
             <button
               onClick={() => navigate(`/order/${orderId}`)}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg"

@@ -1,11 +1,12 @@
 
 import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
-import { fetchCurrentUser } from "./store/authSlice"
+import { AuthProvider, useAuth } from "./context/AuthContext"
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import LoginForm from "./components/LoginForm"
 import RegisterForm from "./components/RegisterForm"
-import HomePage from "./pages/HomePage"
+import ProfilePage from "./pages/ProfilePage"
 import CheckoutPage from "./pages/CheckoutPage"
 import OrderTrackingPage from "./pages/OrderTrackingPage"
 import AdminDashboardPage from "./pages/AdminDashboardPage"
@@ -20,7 +21,11 @@ import Contact from "./components/Contact/Contact"
 import OrderList from "./components/Order/OrderList"
 
 function ProtectedRoute({ children, requiredRole }) {
-  const { isAuthenticated, user } = useSelector((state) => state.auth)
+  const { isAuthenticated, user, loading } = useAuth()
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>
+  }
 
   if (!isAuthenticated) {
     return <Navigate to="/login" />
@@ -34,33 +39,33 @@ function ProtectedRoute({ children, requiredRole }) {
 }
 
 export default function App() {
-  const dispatch = useDispatch()
-
+  // Auth is now handled by AuthProvider and RTK Query
   useEffect(() => {
-    const token = localStorage.getItem("accessToken")
-    if (token) {
-      dispatch(fetchCurrentUser())
-    }
-  }, [dispatch])
-
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
   return (
     <Router>
       <Navbar />
       <Routes>
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/client" element={<Clients />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/order" element={<OrderList />} />
+        <Route path="/admin" element={<AdminDashboardPage />} />
+
         <Route
-          path="/"
+          path="/profile"
           element={
             <ProtectedRoute>
-              <HomePage />
+              <ProfilePage />
             </ProtectedRoute>
           }
         />
@@ -80,14 +85,14 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-        <Route
+        {/* <Route
           path="/admin"
           element={
-            <ProtectedRoute requiredRole="admin">
+            <ProtectedRoute requiredRole="user">
               <AdminDashboardPage />
             </ProtectedRoute>
           }
-        />
+        /> */}
       </Routes>
       <Footer />
     </Router>

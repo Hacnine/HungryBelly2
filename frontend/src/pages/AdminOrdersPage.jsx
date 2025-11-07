@@ -27,12 +27,12 @@ export default function AdminOrdersPage() {
   const statuses = ["placed", "accepted", "preparing", "out_for_delivery", "delivered", "cancelled"]
 
   return (
-    <div className="space-y-6">
-      <div>
+    <div className="space-y-6 animate__animated animate__fadeIn">
+      <div className="animate__animated animate__slideInDown">
         <h2 className="text-2xl font-bold mb-4">All Orders</h2>
 
         {/* Status Filter */}
-        <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
+        <div className="flex gap-2 mb-6 overflow-x-auto pb-2 animate__animated animate__fadeInUp">
           <button
             onClick={() => setStatusFilter(null)}
             className={`px-4 py-2 rounded-lg whitespace-nowrap font-medium transition ${
@@ -56,7 +56,7 @@ export default function AdminOrdersPage() {
       </div>
 
       {/* Orders Table */}
-      <div className="overflow-x-auto bg-white rounded-lg shadow">
+      <div className="overflow-x-auto bg-white rounded-lg shadow animate__animated animate__slideInUp">
         <table className="w-full">
           <thead className="bg-gray-100 border-b">
             <tr>
@@ -83,7 +83,7 @@ export default function AdminOrdersPage() {
               </tr>
             ) : (
               filteredOrders.map((order) => (
-                <tr key={order.id} className="border-b hover:bg-gray-50">
+                <tr key={order.id} className="border-b hover:bg-gray-50 animate__animated animate__fadeIn">
                   <td className="px-6 py-4 font-mono text-sm">{order.id.slice(0, 8)}</td>
                   <td className="px-6 py-4">
                     <span

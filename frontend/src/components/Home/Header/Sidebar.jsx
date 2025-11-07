@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-const Sidebar = ({ isOpen, onClose }) => {
+const Sidebar = ({ isOpen, onClose, user }) => {
     const location = useLocation();
 
     return (
@@ -27,6 +27,14 @@ const Sidebar = ({ isOpen, onClose }) => {
                         &times;
                     </button>
                 </div>
+                {user && (
+                    <div className="flex items-center gap-2 px-4 py-2 bg-hero-bg text-white border-b border-gray-700">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                        </svg>
+                        <span className="font-medium">{user.name}</span>
+                    </div>
+                )}
                 <nav className="flex flex-col items-start p-4 space-y-4 bg-yellow-400 h-full text-gray-100">
                     <Link to={'/'} className={`border-b-2 ${location.pathname === '/' ? " border-customred" : " border-transparent"} font-semibold hover:text-customred `}>Home</Link>
                     <Link to={'/about'} className={`border-b-2 ${location.pathname === '/about' ? " border-customred" : " border-transparent"} hover:text-customred font-semibold`}>About</Link>
@@ -34,6 +42,10 @@ const Sidebar = ({ isOpen, onClose }) => {
                     <Link to={'/client'} className={`border-b-2 ${location.pathname === '/client' ? " border-customred" : " border-transparent"} hover:text-customred font-semibold`}>Clients</Link>
                     <Link to={'/blog'} className={`border-b-2 ${location.pathname === '/blog' ? " border-customred" : " border-transparent"} hover:text-customred font-semibold`}>Blog</Link>
                     <Link to={'/contact'} className={`border-b-2 ${location.pathname === '/contact' ? " border-customred" : " border-transparent"} hover:text-customred font-semibold`}>Contact</Link>
+                    <Link to={'/profile'} className={`border-b-2 ${location.pathname === '/profile' ? " border-customred" : " border-transparent"} hover:text-customred font-semibold`}>Profile</Link>
+                    {user?.role === 'admin' && (
+                        <Link to={'/admin'} className={`border-b-2 ${location.pathname === '/admin' ? " border-customred" : " border-transparent"} hover:text-customred font-semibold`}>Admin</Link>
+                    )}
                 </nav>
             </div>
         </>

@@ -20,7 +20,7 @@ export default function OrderTrackingPage() {
 
   if (loading && !selectedOrder) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center animate__animated animate__fadeIn">
         <div className="text-gray-500">Loading order...</div>
       </div>
     )
@@ -28,8 +28,8 @@ export default function OrderTrackingPage() {
 
   if (!selectedOrder) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
+      <div className="min-h-screen flex items-center justify-center animate__animated animate__fadeIn">
+        <div className="text-center animate__animated animate__zoomIn">
           <p className="text-gray-500 mb-4">Order not found</p>
           <button onClick={() => navigate("/")} className="bg-blue-600 text-white px-6 py-2 rounded-lg">
             Back to Home
@@ -40,23 +40,23 @@ export default function OrderTrackingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 animate__animated animate__fadeIn">
       <div className="max-w-4xl mx-auto px-4">
-        <button onClick={() => navigate("/")} className="text-blue-600 hover:underline mb-6">
+        <button onClick={() => navigate("/")} className="text-blue-600 hover:underline mb-6 animate__animated animate__fadeInLeft">
           ← Back
         </button>
 
-        <div className="bg-white rounded-lg shadow-lg p-8">
+        <div className="bg-white rounded-lg shadow-lg p-8 animate__animated animate__fadeInUp">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Order Tracking</h1>
+            <h1 className="text-3xl font-bold mb-2 animate__animated animate__bounceIn">Order Tracking</h1>
             <p className="text-gray-600">ID: {selectedOrder.id}</p>
           </div>
 
-          <LiveOrderTracking orderId={orderId} initialOrder={selectedOrder} />
+          <div className="animate__animated animate__slideInUp"><LiveOrderTracking orderId={orderId} initialOrder={selectedOrder} /></div>
 
           {/* Order Details */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 animate__animated animate__fadeInUp">
+            <div className="animate__animated animate__slideInLeft">
               <h2 className="text-xl font-bold mb-4">Order Items</h2>
               <div className="space-y-3">
                 {selectedOrder.items.map((item, idx) => (
@@ -77,7 +77,7 @@ export default function OrderTrackingPage() {
               </div>
             </div>
 
-            <div>
+            <div className="animate__animated animate__slideInRight">
               <h2 className="text-xl font-bold mb-4">Status Timeline</h2>
               <div className="space-y-2">
                 {selectedOrder.steps && Array.isArray(selectedOrder.steps) ? (

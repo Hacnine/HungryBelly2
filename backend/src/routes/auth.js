@@ -133,7 +133,9 @@ router.get("/me", authenticate, async (req, res) => {
     const user = await prisma.user.findUnique({
       where: { id: req.user.userId },
     })
-    res.json({ user: { id: user.id, name: user.name, email: user.email, role: user.role } })
+    let user2 = { id: user.id, name: user.name, email: user.email, role: user.role }
+    console.log(user2)
+    res.json(user2)
   } catch (error) {
     res.status(500).json({ error: "server error" })
   }

@@ -78,9 +78,10 @@ const BookingForm = () => {
       <div className="container mx-auto wrapper">
         <SectionHeader inspirationWord={"Book Now"} title={"BOOK YOUR TABLE"} />
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form data-aos="slideInLeft" onSubmit={handleSubmit} className="space-y-4">
           <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
             <input
+              data-aos="fadeIn"
               type="text"
               name="name"
               placeholder="Your Name *"
@@ -90,6 +91,7 @@ const BookingForm = () => {
               required
             />
             <input
+              data-aos="fadeIn"
               type="email"
               name="email"
               placeholder="Your Email"
@@ -102,6 +104,7 @@ const BookingForm = () => {
 
           <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
             <Datepicker
+              data-aos="fadeIn"
               value={value}
               onChange={(newValue) => setValue(newValue)}
               inputClassName={`w-full input pl-10 text-black ${value.startDate ? 'bg-[#e8f0ff]' : 'bg-transparent'}`}
@@ -109,6 +112,7 @@ const BookingForm = () => {
             />
 
             <input
+              data-aos="fadeIn"
               type="number"
               name="totalPeople"
               placeholder="Total People"
@@ -120,6 +124,7 @@ const BookingForm = () => {
           </div>
 
           <textarea
+            data-aos="fadeIn"
             name="message"
             placeholder="Message"
             value={formData.message}
@@ -129,6 +134,7 @@ const BookingForm = () => {
           />
 
           <button
+            data-aos="bounceIn"
             type="submit"
             className="w-fit bg-yellow-500 text-black px-4 py-3 font-semibold hover:bg-yellow-600 transition duration-300"
           >

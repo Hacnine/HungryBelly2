@@ -12,12 +12,14 @@ const NextPrevButton = ({ sliderRef }) => {
   return (
     <>
       <button
+        data-aos="fadeIn"
         className="slider-arrow bg-white shadow-md shadow-gray-300 hover:bg-red-700 text-black hover:text-white rounded-full w-10 h-10 flex items-center justify-center"
         onClick={handlePrevious}
       >
         &#10094;
       </button>
       <button
+        data-aos="fadeIn"
         className="slider-arrow bg-white shadow-md shadow-gray-300 hover:bg-red-700 text-customred hover:text-white rounded-full w-10 h-10 flex items-center justify-center"
         onClick={handleNext}
       >

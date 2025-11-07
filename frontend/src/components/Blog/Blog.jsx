@@ -16,12 +16,12 @@ const Blog = () => {
   }, [location.pathname]);
 
   return (
-    <div className="pb-8">
-      <Hero />
-      <FeaturedArticles />
-      <RecentPosts />
-      <Categories />
-      <Subscription />
+    <div className="pb-8 animate__animated animate__fadeIn">
+      <div className="animate__animated animate__slideInDown"><Hero /></div>
+      <div className="animate__animated animate__fadeInUp"><FeaturedArticles /></div>
+      <div className="animate__animated animate__slideInLeft"><RecentPosts /></div>
+      <div className="animate__animated animate__slideInRight"><Categories /></div>
+      <div className="animate__animated animate__zoomIn"><Subscription /></div>
     </div>
   );
 };
