@@ -2,6 +2,7 @@
 import { useEffect } from "react"
 import { RouterProvider } from "react-router-dom"
 import { AuthProvider } from "./context/AuthContext"
+import { DeliveryAddressProvider } from "./context/DeliveryAddressContext"
 import { router } from "./routes/Routes"
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -16,7 +17,9 @@ export default function App() {
   }, []);
   return (
     <AuthProvider>
-      <RouterProvider router={router} />
+      <DeliveryAddressProvider>
+        <RouterProvider router={router} />
+      </DeliveryAddressProvider>
     </AuthProvider>
   )
 }
