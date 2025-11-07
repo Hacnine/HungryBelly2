@@ -15,12 +15,16 @@ router.post("/", async (req, res) => {
     }
 
     // Generate unique order number
-    const orderNumber = `ORD-${Date.now()}-${Math.random().toString(36).substr(2, 5).toUpperCase()}`
+    const date = new Date()
+    const dateStr = date.toISOString().slice(0, 10).replace(/-/g, '')
+    const randomNum = Math.floor(Math.random() * 10000).toString().padStart(4, '0')
+    const orderNumber = `ORD-${dateStr}-${randomNum}`
 
     const orderData = {
       items,
       total: Number.parseFloat(total),
       status: "placed",
+      orderNumber,
       steps: [
         {
           step: "placed",
@@ -28,20 +32,30 @@ router.post("/", async (req, res) => {
           message: "Order has been placed successfully"
         },
       ],
-      orderNumber,
-      deliveryAddress,
-      notes,
-      coupons: coupon ? [coupon] : null
     }
 
-    // Add user info if authenticated, otherwise add guest info
-    if (req.user) {
+    // Add userId if authenticated
+    if (req.user?.userId) {
       orderData.userId = req.user.userId
-    } else {
+    }
+
+    // Add guest info if provided (required for guest orders)
+    if (!req.user?.userId) {
       if (!guestInfo || !guestInfo.name || !guestInfo.email) {
         return res.status(400).json({ error: "Guest information required for guest orders" })
       }
       orderData.guestInfo = guestInfo
+    }
+
+    // Add optional fields
+    if (deliveryAddress) {
+      orderData.deliveryAddress = deliveryAddress
+    }
+    if (notes) {
+      orderData.notes = notes
+    }
+    if (coupon) {
+      orderData.coupons = coupon
     }
 
     const order = await prisma.order.create({
