@@ -1,0 +1,16 @@
+export const APP_ROUTES = {
+  home: "/",
+  login: "/login",
+  register: "/register",
+  about: "/about",
+  portfolio: "/portfolio",
+  client: "/client",
+  blog: "/blog",
+  contact: "/contact",
+  order: "/order",
+  products: "/products",
+  admin: "/admin",
+  profile: "/profile",
+  checkout: "/checkout",
+  orderTracking: "/order/:orderIdentifier",
+};
