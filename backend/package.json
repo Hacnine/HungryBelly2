@@ -1,37 +1,44 @@
 {
-  "name": "api",
+  "name": "hungrybelly-backend",
   "version": "1.0.0",
-  "private": true,
   "type": "module",
+  "description": "HungryBelly Backend API Server",
+  "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
     "start": "node src/index.js",
-    "test": "jest --passWithNoTests",
-    "test:watch": "jest --watch",
-    "lint": "eslint src/",
-    "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma migrate dev",
-    "prisma:studio": "prisma studio"
+    "dev": "nodemon src/index.js",
+    "prisma:generate": "npx prisma generate",
+    "prisma:push": "npx prisma db push",
+    "prisma:studio": "npx prisma studio",
+    "seed": "node scripts/seed.js",
+    "migrate": "node scripts/migrate-data.js",
+    "test": "jest"
   },
+  "keywords": [
+    "food-delivery",
+    "api",
+    "express",
+    "prisma",
+    "mongodb"
+  ],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2",
-    "cors": "^2.8.5",
-    "cookie-parser": "^1.4.6",
-    "dotenv": "^16.3.1",
+    "@prisma/client": "^6.19.0",
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
-    "@prisma/client": "^5.5.2",
-    "socket.io": "^4.7.2",
-    "redis": "^4.6.10",
-    "ioredis": "^5.3.2",
-    "stripe": "^14.0.0",
-    "nodemailer": "^6.9.6"
+    "nodemailer": "^6.9.17",
+    "socket.io": "^4.8.1",
+    "stripe": "^17.5.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1",
-    "prisma": "^5.5.2",
     "jest": "^29.7.0",
-    "supertest": "^6.3.3",
-    "eslint": "^8.51.0"
+    "nodemon": "^3.1.9",
+    "prisma": "^6.19.0",
+    "supertest": "^7.1.0"
   }
 }
