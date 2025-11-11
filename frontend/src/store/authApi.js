@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    // Call backend directly; use VITE_API_URL in .env or default to localhost:4000
+    // Call backend directly; use VITE_API_URL in .env or default to localhost:5000
     baseUrl: `${API_URL}/auth`,
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("accessToken");
